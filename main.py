@@ -1,30 +1,29 @@
 import random
 
 DECISION = "Y/N or q to quit"
+decisions = ["y", "n", "q"]
 STARTING_BALANCE = 100
 BUYOUT = 500
 new_line = "\n"
+balance = 0
 
+print("Hello and welcome to Life's a Gamble! 🎲🎲🎲\n")
+name = input("What's your name? ")
+print('') 
+print(f"Okay {name} the rules will be quite simple, you will wager money on your decisions and if you can manage to make enough money you can buy yourself out.\n\nI shall be your host and guide you, now....")
 
+play_input = input(f"{new_line}Do you wish to play? {DECISION} ")
+if play_input.lower() == "y":
+    pass
+elif play_input.lower() == "n" or play_input.lower() == "q":
+    print("Maybe next time then.")
+    exit()
+if play_input.lower() not in decisions:
+    print(f"Please type {DECISION}")
+    
+print(new_line)
 
-while True:
-    print("Hello and welcome to Life's a Gamble! 🎲🎲🎲\n")
-    name = input("What's your name? ")
-    print('')
-    print(f"Okay {name} the rules will be quite simple, you will wager money on your decisions and if you can manage to make enough money you can buy yourself out.\n\nI shall be your host and guide you, now....")
-
-    play_input = input(f"{new_line}Do you wish to play? {DECISION} ")
-    if play_input.lower() == "y":
-        pass
-    elif play_input.lower() == "n" or play_input.lower() == "q":
-        print("Maybe next time then.")
-        exit()
-    else:
-        print(f"Please type {DECISION}")
-
-    print("\n")
-
-    balance = 0
+while balance <= BUYOUT:
     start = input(f"You have woken up in an unfamiliar place, it seems to be an abandoned casino...There's an envelope with ${STARTING_BALANCE}, pick it up? {DECISION} ")
     if start.lower() == "y":
         balance += STARTING_BALANCE
@@ -54,3 +53,6 @@ while True:
     else:
         print("Enter either 1 or 2")
 
+
+else:
+    print(f"Congrats. You can now buy your freedom. You wagered the greatest wager and you survived to tell the tale...{new_line}{new_line}for now....")
