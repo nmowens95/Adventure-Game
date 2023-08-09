@@ -43,12 +43,13 @@ def start(input):
                 print(f"{new_line}Please type {DECISION}")
                 continue
         return balance
+    
+
 start(input)
 
 def obstacle1(input):
     print(f"{new_line}As you look ahead of you, what you will see is a door. This is the start of the fight for your life.")
     print("\n")
-    balance = start(input)
     while True:
         random_num = random.randint(1, 2)
         guess = input("We'll start easy. Guess a number between 1 and 2, if you're right the first door will open. If not you will have to continue to wager. ")
@@ -70,3 +71,11 @@ def obstacle1(input):
     return balance
 
 obstacle1(input)
+
+def main():
+    balance = start()
+    while True:
+        if obstacle1 > 0:
+            balance = obstacle1()
+
+main()
