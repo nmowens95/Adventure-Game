@@ -80,7 +80,7 @@ def obstacle2():
     slot = slot_options[random_guess]
     while True:
         if balance <= 0:
-            print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...You are dead😵")
+            print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...The royalty from the cards emerge from nowhere and cover your face...you are now dead😵")
             quit()
         guess = input(f"{new_line}Pick: King/Queen/Jack ")
         if guess.lower() == slot:
@@ -106,7 +106,7 @@ def obstacle3():
     odd = dice_roll % 1 == 1
     while True:
         if balance <= 0:
-            print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...You are dead😵")
+            print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...The dice grows 100,000 fold and rols over you...you are now dead😵")
             quit()
         guess = input(f"{new_line}Pick either 1 for odds or 2 for evens: ")
         if int(guess) == even or int(guess) == odd:
