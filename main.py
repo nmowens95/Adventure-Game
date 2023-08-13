@@ -96,7 +96,7 @@ def obstacle2():
             continue
     return balance
 
-
+# The way the even's and odds work is clunky. Plus it feels as if it is similar to obsacle one
 def obstacle3():
     balance = int(obstacle2())
     print(f"{new_line}(Narrator): Ahh luck may be with you. Lets up the ante to $50.")
@@ -122,9 +122,34 @@ def obstacle3():
             continue
     return balance
 
-
+# Need to create a new obstacle entirely, this is still obstacle 3 code
 def obstacle4():
     balance = int(obstacle3())
+    print(f"{new_line}(Narrator): Ahh luck may be with you. Lets up the ante to $50.")
+    print(f"{new_line}(Narrator): On the table to your right is a dice cube. Roll the dice and for this the name of the game is odds or evens. ")
+    dice_roll = random.randint(1, 6)
+    even = dice_roll % 2 == 0
+    odd = dice_roll % 1 == 1
+    while True:
+        if balance <= 0:
+            print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...The dice grows 100,000 fold and rols over you...you are now dead😵")
+            quit()
+        guess = input(f"{new_line}Pick either 1 for odds or 2 for evens: ")
+        if int(guess) == even or int(guess) == odd:
+            balance += 80
+            print(f"{new_line}(Narrator): ...Lucky enough. Your roll worked in your favor. Here is a little reward for you. You won $80 and your balance is now ${balance}")
+            break
+        elif int(guess) != even or int(guess) != odd:
+            balance -= 50
+            print(f"{new_line}(Narrator): Oh no looks like the dice isn't your kind of game!....your balance is now ${balance}")
+            continue
+        else:
+            print(f"{new_line}Pick either 1 for odds or 2 for evens: ")
+            continue
+    return balance
+
+def obstacle5():
+    balance = int(obstacle4())
     print(f"{new_line}*** A staircase in the corner of the room slides open revealing a passageway into the basement ***{new_line}")
     print(f"{new_line}(Narrator): Take the passage ahead.")
     print(f"{new_line}*** As you walk in you see the remnants of a bar...behind the counter is an old worn down mechanical bartender. ***")
@@ -149,4 +174,4 @@ def obstacle4():
             print(f"{new_line}Pick either Whisky, Water or Gin: ")
             continue
     return balance
-obstacle4()
+obstacle5()
