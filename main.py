@@ -125,11 +125,9 @@ def obstacle3():
 # Need to create a new obstacle entirely, this is still obstacle 3 code
 def obstacle4():
     balance = int(obstacle3())
-    print(f"{new_line}(Narrator): Ahh luck may be with you. Lets up the ante to $50.")
-    print(f"{new_line}(Narrator): On the table to your right is a dice cube. Roll the dice and for this the name of the game is odds or evens. ")
-    dice_roll = random.randint(1, 6)
-    even = dice_roll % 2 == 0
-    odd = dice_roll % 1 == 1
+    print(f"{new_line}(Narrator): You've done well thus far. This round will cost you $80.")
+    print(f"{new_line}(Narrator): Now to your left is a horse race simulator. You can bet on Zues, Hercules, Helen or Aphrodite to win the race.")
+    horses = ['zues', 'hercules', 'helen', 'aphrodite']
     while True:
         if balance <= 0:
             print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...The dice grows 100,000 fold and rols over you...you are now dead😵")
