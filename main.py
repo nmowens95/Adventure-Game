@@ -55,19 +55,24 @@ def obstacle1():
             print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...You are dead😵")
             quit()
         guess = input(f"{new_line}Pick 1 or 2: ")
+        if guess is not int:
+            continue
         if guess.isdigit():
             guess = int(guess)
             if guess == random_num:
                 balance += 10
                 print(f"{new_line}(Narrator): Looks like you've made it through phase one... Here is a little reward for you. You've won $10 and your balance is now ${balance}")
                 break
-            elif guess != random_num:
+            elif guess != balance:
                 balance -= 5
                 print(f"{new_line}(Narrator): Guess you'll have to try again....your balance is now ${balance}")
                 continue
+            elif guess > 2 or guess < 1:
+                print(f"{new_line}Enter either 1 or 2: ")
+                continue 
             else:
                 print(f"{new_line}Enter either 1 or 2: ")
-                continue
+                continue 
     return balance
 
 
@@ -82,46 +87,47 @@ def obstacle2():
         if balance <= 0:
             print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...The royalty from the cards emerge from nowhere and cover your face...you are now dead😵")
             quit()
-        guess = input(f"{new_line}Pick: King/Queen/Jack ")
-        if guess.lower() == slot:
+        guess = input(f"{new_line}Pick - King/Queen/Jack: ")
+        if guess.lower() not in slot_options:
+            print(f"{new_line}The options are - King/Queen/Jack: ")
+            continue
+        elif guess.lower() == slot:
             balance += 40
             print(f"{new_line}(Narrator): That's your 2nd obstacle... Here is a little reward for you. You've won $40 and your balance is now ${balance}")
             break
-        elif guess.lower != slot:
+        else:
             balance -= 20
             print(f"{new_line}(Narrator): Guess you'll have to try again....your balance is now ${balance}")
-            continue
-        else:
-            print(f"{new_line}Enter King/Queen/Jack: ")
-            continue
+            continue               
     return balance
 
-# The way the even's and odds work is clunky. Plus it feels as if it is similar to obsacle one
+
 def obstacle3():
     balance = int(obstacle2())
-    print(f"{new_line}(Narrator): Ahh luck may be with you. Lets up the ante to $50.")
-    print(f"{new_line}(Narrator): On the table to your right is a dice cube. Roll the dice and for this the name of the game is odds or evens. ")
+    print(f"{new_line}(Narrator): Ahh luck may be with you. This one your chances wont be so good. The anti is only $25.")
+    print(f"{new_line}(Narrator): On the table to your right is a dice cube. Roll the dice and we'll see what your odds really are. ")
     dice_roll = random.randint(1, 6)
-    even = dice_roll % 2 == 0
-    odd = dice_roll % 2 == 1
     while True:
         if balance <= 0:
-            print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...The dice grows 100,000 fold and rols over you...you are now dead😵")
+            print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...The dice grows 100,000 fold and rolls over you...you are now dead😵")
             quit()
         guess = input(f"{new_line}Pick a number between 1-6: ")
-        outcome_even = int(guess) % 2 == 0
-        outcome_odd = int(guess) % 2 == 1
-        if int(guess) == outcome_even and outcome_even == even or int(guess) == outcome_odd and outcome_odd == odd:
-            balance += 80
-            print(f"{new_line}(Narrator): ...Lucky enough, that's 3 down. Your roll worked in your favor. Here is a little reward for you. You've won $80 and your balance is now ${balance}")
-            break
-        elif int(guess) != even or int(guess) != odd:
-            balance -= 50
-            print(f"{new_line}(Narrator): Oh no looks like the dice isn't your kind of game!....your balance is now ${balance}")
-            continue
-        else:
-            print(f"{new_line}Not quite, has to be a number between 1-6: ")
-            continue
+        if guess.isdigit():
+            guess = int(guess)
+            if int(guess) == dice_roll:
+                balance += 80
+                print(f"{new_line}(Narrator): ...Lucky enough, that's 3 down. Your roll worked in your favor. Here is a little reward for you. You've won $80 and your balance is now ${balance}")
+                break
+            if int(guess) != dice_roll:
+                balance -= 25
+                print(f"{new_line}(Narrator): Oh no looks like the dice isn't your kind of game!....your balance is now ${balance}")
+                continue
+            elif guess > 6 or guess < 0:
+                print(f"{new_line}Not quite, has to be a number between 1-6: ")
+                continue
+            else:
+                print(f"{new_line}Not quite, has to be a number between 1-6: ")
+                continue
     return balance
 
 
