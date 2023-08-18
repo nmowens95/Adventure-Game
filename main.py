@@ -59,7 +59,7 @@ def obstacle1():
             guess = int(guess)
             if guess == random_num:
                 balance += 10
-                print(f"{new_line}(Narrator): Looks like you've made it through phase one... Here is a little reward for you. You won $10 and your balance is now ${balance}")
+                print(f"{new_line}(Narrator): Looks like you've made it through phase one... Here is a little reward for you. You've won $10 and your balance is now ${balance}")
                 break
             elif guess != random_num:
                 balance -= 5
@@ -85,7 +85,7 @@ def obstacle2():
         guess = input(f"{new_line}Pick: King/Queen/Jack ")
         if guess.lower() == slot:
             balance += 40
-            print(f"{new_line}(Narrator): That's your 2nd obstacle... Here is a little reward for you. You won $40 and your balance is now ${balance}")
+            print(f"{new_line}(Narrator): That's your 2nd obstacle... Here is a little reward for you. You've won $40 and your balance is now ${balance}")
             break
         elif guess.lower != slot:
             balance -= 20
@@ -103,48 +103,52 @@ def obstacle3():
     print(f"{new_line}(Narrator): On the table to your right is a dice cube. Roll the dice and for this the name of the game is odds or evens. ")
     dice_roll = random.randint(1, 6)
     even = dice_roll % 2 == 0
-    odd = dice_roll % 1 == 1
+    odd = dice_roll % 2 == 1
     while True:
         if balance <= 0:
             print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...The dice grows 100,000 fold and rols over you...you are now dead😵")
             quit()
-        guess = input(f"{new_line}Pick either 1 for odds or 2 for evens: ")
-        if int(guess) == even or int(guess) == odd:
+        guess = input(f"{new_line}Pick a number between 1-6: ")
+        outcome_even = int(guess) % 2 == 0
+        outcome_odd = int(guess) % 2 == 1
+        if int(guess) == outcome_even and outcome_even == even or int(guess) == outcome_odd and outcome_odd == odd:
             balance += 80
-            print(f"{new_line}(Narrator): ...Lucky enough. Your roll worked in your favor. Here is a little reward for you. You won $80 and your balance is now ${balance}")
+            print(f"{new_line}(Narrator): ...Lucky enough, that's 3 down. Your roll worked in your favor. Here is a little reward for you. You've won $80 and your balance is now ${balance}")
             break
         elif int(guess) != even or int(guess) != odd:
             balance -= 50
             print(f"{new_line}(Narrator): Oh no looks like the dice isn't your kind of game!....your balance is now ${balance}")
             continue
         else:
-            print(f"{new_line}Pick either 1 for odds or 2 for evens: ")
+            print(f"{new_line}Not quite, has to be a number between 1-6: ")
             continue
     return balance
 
-# Need to create a new obstacle entirely, this is still obstacle 3 code
+
 def obstacle4():
     balance = int(obstacle3())
     print(f"{new_line}(Narrator): You've done well thus far. This round will cost you $80.")
     print(f"{new_line}(Narrator): Now to your left is a horse race simulator. You can bet on Zues, Hercules, Helen or Aphrodite to win the race.")
     horses = ['zues', 'hercules', 'helen', 'aphrodite']
+    horse_winner = random.choice(horses)
     while True:
         if balance <= 0:
-            print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...The dice grows 100,000 fold and rols over you...you are now dead😵")
+            print(f"{new_line}(Narrator): Life is money and yours is up.\n\nA Horse emerges from the screen, trampling you in the process...you are now dead😵")
             quit()
-        guess = input(f"{new_line}Pick either 1 for odds or 2 for evens: ")
-        if int(guess) == even or int(guess) == odd:
-            balance += 80
-            print(f"{new_line}(Narrator): ...Lucky enough. Your roll worked in your favor. Here is a little reward for you. You won $80 and your balance is now ${balance}")
+        guess = input(f"{new_line}Pick between - Zeus, Hercules, Helen or Aphrodite: ")
+        if guess.lower() == horse_winner:
+            balance += 120
+            print(f"{new_line}(Narrator): ...HAH! This 4th was a doosey. You have a keen eye. Here is a little reward for you. You've won $120 and your balance is now ${balance}")
             break
-        elif int(guess) != even or int(guess) != odd:
-            balance -= 50
-            print(f"{new_line}(Narrator): Oh no looks like the dice isn't your kind of game!....your balance is now ${balance}")
+        elif guess.lower() != horse_winner:
+            balance -= 80
+            print(f"{new_line}(Narrator): Oh no seems you don't know horses all too well!....your balance is now ${balance}")
             continue
         else:
-            print(f"{new_line}Pick either 1 for odds or 2 for evens: ")
+            print(f"{new_line}Pick between - Zeus, Hercules, Helen or Aphrodite: ")
             continue
     return balance
+
 
 def obstacle5():
     balance = int(obstacle4())
@@ -156,10 +160,10 @@ def obstacle5():
         if balance <= 0:
             print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...You have drank the poison and now have died 😵")
             quit()
+        guess = input(f"{new_line}Pick either Whiskey, Water or Gin: ")
         if balance >= BUYOUT:
             print(f"{new_line}(Narrator): Life is money and you are overflowing with wealth. {new_line}{new_line}*** A platform lifts you to the roof of a building surrounded by water, at the top is a helicopter ***{new_line}{new_line}You've done it, you've won the game: Life's a Gamble!!!")
             quit()
-        guess = input(f"{new_line}Pick either Whiskey, Water or Gin: ")
         if guess.lower() == "whiskey":
             balance += BUYOUT
             print(f"{new_line}(Narrator): ...I admire your selection. You've won $300 and your balance is now ${balance}")
@@ -169,7 +173,7 @@ def obstacle5():
             print(f"{new_line}(Narrator): Oh no your taste is awful and deadly....your balance is now ${balance}")
             continue
         else:
-            print(f"{new_line}Pick either Whisky, Water or Gin: ")
+            print(f"{new_line}Whale that isn't an option. Pick either Whisky, Water or Gin: ")
             continue
     return balance
 obstacle5()
