@@ -27,6 +27,7 @@ def play():
                 exit()
 play()
 
+
 def start():
     while True:
         play_input = input(f"{new_line}You have woken up in an unfamiliar place, it seems to be an abandoned casino...There's an envelope with ${STARTING_BALANCE}, pick it up? {DECISION} ")
@@ -55,24 +56,22 @@ def obstacle1():
             print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...You are dead😵")
             quit()
         guess = input(f"{new_line}Pick 1 or 2: ")
-        if guess is not int:
-            continue
         if guess.isdigit():
             guess = int(guess)
-            if guess == random_num:
-                balance += 10
-                print(f"{new_line}(Narrator): Looks like you've made it through phase one... Here is a little reward for you. You've won $10 and your balance is now ${balance}")
-                break
-            elif guess != balance:
-                balance -= 5
-                print(f"{new_line}(Narrator): Guess you'll have to try again....your balance is now ${balance}")
+        elif guess == str(guess):
+                print(f"{new_line}Enter either 1 or 2: ")
                 continue
-            elif guess > 2 or guess < 1:
-                print(f"{new_line}Enter either 1 or 2: ")
-                continue 
-            else:
-                print(f"{new_line}Enter either 1 or 2: ")
-                continue 
+        if guess > 2 or guess < 1:
+            print(f"{new_line}Enter either 1 or 2: ")
+            continue 
+        elif guess == random_num:
+            balance += 10
+            print(f"{new_line}(Narrator): Looks like you've made it through phase one... Here is a little reward for you. You've won $10 and your balance is now ${balance}")
+            break
+        else:
+            balance -= 5
+            print(f"{new_line}(Narrator): Guess you'll have to try again....your balance is now ${balance}")
+            continue 
     return balance
 
 
@@ -114,20 +113,20 @@ def obstacle3():
         guess = input(f"{new_line}Pick a number between 1-6: ")
         if guess.isdigit():
             guess = int(guess)
-            if int(guess) == dice_roll:
-                balance += 80
-                print(f"{new_line}(Narrator): ...Lucky enough, that's 3 down. Your roll worked in your favor. Here is a little reward for you. You've won $80 and your balance is now ${balance}")
-                break
-            if int(guess) != dice_roll:
-                balance -= 25
-                print(f"{new_line}(Narrator): Oh no looks like the dice isn't your kind of game!....your balance is now ${balance}")
-                continue
-            elif guess > 6 or guess < 0:
-                print(f"{new_line}Not quite, has to be a number between 1-6: ")
-                continue
-            else:
-                print(f"{new_line}Not quite, has to be a number between 1-6: ")
-                continue
+        elif guess == str(guess):
+            print(f"{new_line}Not quite, has to be a number between 1-6: ")
+            continue
+        if guess >= 7 or guess < 0:
+            print(f"{new_line}Not quite, has to be a number between 1-6: ")
+            continue
+        if guess == dice_roll:
+            balance += 80
+            print(f"{new_line}(Narrator): ...Lucky enough, that's 3 down. Your roll worked in your favor. Here is a little reward for you. You've won $80 and your balance is now ${balance}")
+            break
+        else: 
+            balance -= 25
+            print(f"{new_line}(Narrator): Oh no looks like the dice isn't your kind of game!....your balance is now ${balance}")
+            continue
     return balance
 
 
@@ -142,16 +141,19 @@ def obstacle4():
             print(f"{new_line}(Narrator): Life is money and yours is up.\n\nA Horse emerges from the screen, trampling you in the process...you are now dead😵")
             quit()
         guess = input(f"{new_line}Pick between - Zeus, Hercules, Helen or Aphrodite: ")
+        if guess == int:
+            print(f"{new_line}The choices are... Zeus, Hercules, Helen or Aphrodite: ")
+            continue
+        elif guess.lower() not in horses:
+            print(f"{new_line}The choices are... Zeus, Hercules, Helen or Aphrodite: ")
+            continue
         if guess.lower() == horse_winner:
             balance += 120
             print(f"{new_line}(Narrator): ...HAH! This 4th was a doosey. You have a keen eye. Here is a little reward for you. You've won $120 and your balance is now ${balance}")
             break
-        elif guess.lower() != horse_winner:
+        else:
             balance -= 80
             print(f"{new_line}(Narrator): Oh no seems you don't know horses all too well!....your balance is now ${balance}")
-            continue
-        else:
-            print(f"{new_line}Pick between - Zeus, Hercules, Helen or Aphrodite: ")
             continue
     return balance
 
@@ -161,25 +163,24 @@ def obstacle5():
     print(f"{new_line}*** A staircase in the corner of the room slides open revealing a passageway into the basement ***{new_line}")
     print(f"{new_line}(Narrator): Take the passage ahead.")
     print(f"{new_line}*** As you walk in you see the remnants of a bar...behind the counter is an old worn down mechanical bartender. ***")
-    print(f"{new_line}(Narrator): This one is my favorite. We are truly betting on life itself this time. {new_line}You will have 3 drinks to choose from. Only one option isn't poisoned and this time the buy in is priceless, your taste will determine the price.")
+    print(f"{new_line}(Narrator): This one is my favorites. We are truly betting on life itself this time. {new_line}You will have 3 drinks to choose from. Only one of the options aren't poisoned{new_line}Oh! by the way this time the buy in is priceless...its's your taste that will determine the price.")
     while True:
         if balance <= 0:
             print(f"{new_line}(Narrator): Life is money and yours is up.\n\n...You have drank the poison and now have died 😵")
             quit()
-        guess = input(f"{new_line}Pick either Whiskey, Water or Gin: ")
-        if balance >= BUYOUT:
+        elif balance >= BUYOUT:
             print(f"{new_line}(Narrator): Life is money and you are overflowing with wealth. {new_line}{new_line}*** A platform lifts you to the roof of a building surrounded by water, at the top is a helicopter ***{new_line}{new_line}You've done it, you've won the game: Life's a Gamble!!!")
             quit()
+        guess = input(f"{new_line}Pick either Whiskey, Water or Gin: ")
         if guess.lower() == "whiskey":
             balance += BUYOUT
-            print(f"{new_line}(Narrator): ...I admire your selection. You've won $300 and your balance is now ${balance}")
+            print(f"{new_line}(Narrator): ...I admire your selection. You've won ${BUYOUT} and your balance is now ${balance}")
             continue
         elif guess.lower() == "water" or guess.lower() == "gin":
             balance -= balance
             print(f"{new_line}(Narrator): Oh no your taste is awful and deadly....your balance is now ${balance}")
             continue
         else:
-            print(f"{new_line}Whale that isn't an option. Pick either Whisky, Water or Gin: ")
+            print(f"{new_line}Are you for real? Pick either Whisky, Water or Gin: ")
             continue
-    return balance
 obstacle5()
